@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 词库终端</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>谁是卧底</h1>
+        </div>
+        <div class="game-settings">
+            <div class="setting-group">
+                <div class="setting-label">
+                    输入6个人物
+                </div>
+                <div class="players-grid" id="playersGrid">
+                <!--动态生成-->
+                </div>
+            </div>
+        </div>
+
+        <div class="setting-group">
+            <div class="setting-label">
+                词语设置
+            </div>
+            <div class="radio-group" id="wordSourceGroup">
+                <label class="radio-option" data-value="ai">
+                    <input type="radio" name="wordSource" value="ai"checked>AI生成
+                </label>
+                <label class="radio-option" data-value="manual">
+                    <input type="radio" name="wordSource" value="manual">手动输入
+                </label>
+            </div>
+            <div id="wordInputArea">
+                <!--动态生成-->
+            </div>
+        </div>
+
+    <div class="info-hint" id="dynamicHint">
+        系统地生成相似词
+    </div>
+
+    <div class="start-btn-wrapper">
+        <button class="btn-start">开始</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

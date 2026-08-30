@@ -1,0 +1,297 @@
+/* ============================================================
+   MPOSTOR 猜词终端 · 工业终端风
+   ============================================================ */
+
+.guess-container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 30px 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ---------- 页眉 ---------- */
+.guess-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-bright);
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.guess-header::after {
+    content: '+';
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    transform: translateX(-50%);
+    background: var(--bg);
+    color: var(--green-dim);
+    padding: 0 8px;
+    font-family: var(--mono);
+    line-height: 1;
+}
+
+.back-link {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    transition: all .12s;
+}
+.back-link:hover {
+    color: var(--green);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.guess-header h1 {
+    font-size: 22px;
+    color: var(--green);
+    letter-spacing: .14em;
+    text-shadow: var(--glow-strong);
+    margin-right: auto;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ---------- 状态徽章（script.js 设置 className = "status playing/ended"） ---------- */
+.status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+}
+.status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--green-dark);
+}
+.status.playing { color: var(--green); border-color: var(--green-dim); }
+.status.playing::before {
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: ledBlink 1.2s steps(1) infinite;
+}
+.status.ended { color: var(--amber); border-color: var(--amber); }
+.status.ended::before {
+    background: var(--amber);
+    box-shadow: 0 0 6px rgba(255, 179, 0, .7);
+}
+
+/* ---------- 信息面板 ---------- */
+.guess-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 14px;
+    padding: 14px 16px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.info-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: var(--text-faint);
+}
+
+.info-value {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--green);
+    text-shadow: var(--glow);
+    word-break: break-all;
+}
+
+/* 字符槽 [ _ ] */
+.info-value.slots {
+    font-size: 18px;
+    letter-spacing: .18em;
+    color: var(--green);
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+/* 提示行（script.js 内联 style.color，hint-popup 闪烁） */
+#hintDisplay { font-size: 13px; }
+
+#hintDisplay.hint-popup {
+    animation: hintFlash .5s steps(3);
+}
+
+@keyframes hintFlash {
+    0%   { opacity: .15; text-shadow: none; }
+    50%  { opacity: 1; text-shadow: var(--glow-strong); }
+    100% { opacity: .8; }
+}
+
+/* ---------- 终端输入行 ---------- */
+.guess-input-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    flex-wrap: wrap;
+}
+
+.prompt {
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--green);
+    text-shadow: var(--glow);
+    animation: ledBlink 1.6s steps(1) infinite;
+}
+
+.guess-input-area .input {
+    flex: 1;
+    min-width: 160px;
+}
+
+/* ---------- 猜词历史（终端行） ---------- */
+.guess-history .history-list {
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-item {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    grid-template-areas:
+        "num word result"
+        "num hint hint";
+    gap: 2px 10px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line);
+    border-left: 2px solid var(--red);
+    animation: slideInRight .25s steps(4);
+}
+
+.history-item:last-child { border-bottom: none; }
+
+.history-item.partial { border-left-color: var(--amber); }
+.history-item.correct { border-left-color: var(--green); }
+
+.guess-number {
+    grid-area: num;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    padding-top: 3px;
+}
+
+.guess-word {
+    grid-area: word;
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--text);
+    letter-spacing: .12em;
+}
+
+.guess-result {
+    grid-area: result;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    border: 1px solid;
+    padding: 2px 8px;
+    align-self: start;
+}
+.guess-result.correct { color: var(--green); border-color: var(--green); text-shadow: var(--glow); }
+.guess-result.partial { color: var(--amber); border-color: var(--amber); }
+.guess-result.wrong   { color: var(--red);   border-color: var(--red); }
+
+.ai-hint {
+    grid-area: hint;
+    font-size: 12px;
+    color: var(--text-dim);
+    word-break: break-all;
+}
+
+.empty-hint {
+    color: var(--text-faint);
+    text-align: center;
+    padding: 22px;
+    border: 1px dashed var(--line);
+    font-size: 12px;
+    font-family: var(--mono);
+    letter-spacing: .1em;
+}
+
+/* ---------- 游戏结束弹窗 ---------- */
+.game-over {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(2, 6, 3, .88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn .3s steps(5);
+}
+
+.game-over-content {
+    width: min(440px, 92vw);
+    text-align: center;
+    padding: 34px 28px 30px;
+}
+
+.result-icon {
+    font-family: var(--mono);
+    font-size: 44px;
+    color: var(--green);
+    text-shadow: var(--glow-strong);
+    animation: ledPulse 1.6s infinite;
+}
+
+.game-over-content h2 {
+    font-size: 26px;
+    color: var(--green);
+    letter-spacing: .16em;
+    text-shadow: var(--glow-strong);
+    margin: 12px 0 10px;
+}
+
+.game-over-content p {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    letter-spacing: .06em;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.game-over-content strong { color: var(--amber); }
+
+.game-over-content .btn { min-width: 160px; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 640px) {
+    .guess-info { grid-template-columns: 1fr 1fr; }
+    .info-hint { grid-column: 1 / -1; }
+    .guess-input-area .input { flex-basis: 100%; }
+}

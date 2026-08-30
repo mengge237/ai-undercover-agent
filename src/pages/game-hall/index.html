@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 游戏大厅</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="hall-container">
+        <!-- 头部 -->
+        <header class="hall-header">
+            <div class="logo">
+                <a href="../../../index.html" class="back-link">← 返回</a>
+                <span class="logo-mark" data-mpostor-logo>■</span>
+                <span class="logo-text">MPOSTOR</span>
+                <span class="logo-sub">GAME HALL // 游戏大厅</span>
+            </div>
+            <div class="header-status">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">连接中...</span>
+                <span class="status-sep">|</span>
+                <span class="account-chip" id="accountChip">账号: ---</span>
+                <button class="btn btn-sm" id="logoutBtn" title="退出登录">登出</button>
+                <button class="btn btn-sm" id="muteBtn" title="音效开关">SND:ON</button>
+            </div>
+        </header>
+
+        <!-- 游戏类型选项卡 -->
+        <nav class="tab-bar" id="tabBar">
+            <button class="tab-btn active" data-tab="undercover" type="button">谁是卧底</button>
+            <button class="tab-btn" data-tab="bomb" type="button">拆弹小队</button>
+            <button class="tab-btn" data-tab="idiom" type="button">成语接龙</button>
+            <button class="tab-btn" data-tab="turtle" type="button">海龟汤</button>
+            <button class="tab-btn" data-tab="quiz" type="button">趣味问答</button>
+        </nav>
+
+        <main class="hall-main">
+            <!-- 左侧：房间列表（按当前选项卡过滤） -->
+            <section class="room-list-section panel">
+                <div class="panel-header">
+                    <span class="panel-title">Room List</span>
+                    <button class="btn btn-sm" id="refreshRoomsBtn" type="button">↻ 刷新</button>
+                </div>
+                <div class="room-list" id="roomList">
+                    <div class="empty-state">
+                        <p>暂无房间</p>
+                        <span>点击右侧创建房间</span>
+                    </div>
+                </div>
+                <div class="room-hint">
+                    &gt; 点击「加入」进入房间，房主可「开始游戏」
+                </div>
+            </section>
+
+            <!-- 右侧：创建房间 -->
+            <section class="create-room-section panel">
+                <div class="panel-header">
+                    <span class="panel-title">Create Room</span>
+                    <span class="tag">ROOM CONFIG</span>
+                </div>
+
+                <!-- 卧底表单（保留原字段） -->
+                <div class="create-card" id="undercoverForm">
+                    <div class="form-group">
+                        <label class="label-term" for="roomNameInput">Room Name</label>
+                        <input class="input" type="text" id="roomNameInput" placeholder="输入房间名称" value="我的房间">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term" for="playerNameInput">Operator</label>
+                        <input class="input" type="text" id="playerNameInput" placeholder="输入你的名字" value="玩家1">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term">Password <span class="opt">(可选)</span></label>
+                        <input class="input" type="text" id="roomPasswordInput" placeholder="留空表示无密码" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term">Capacity</label>
+                        <div class="mode-selector" id="playerCountSelector">
+                            <button class="mode-btn" data-count="4" type="button">04</button>
+                            <button class="mode-btn active" data-count="6" type="button">06</button>
+                            <button class="mode-btn" data-count="8" type="button">08</button>
+                            <button class="mode-btn" data-count="10" type="button">10</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term">AI Units</label>
+                        <div class="toggle-group" id="aiToggleGroup">
+                            <button class="toggle-btn active" data-value="on" type="button">■ 启用AI</button>
+                            <button class="toggle-btn" data-value="off" type="button">□ 关闭AI</button>
+                        </div>
+                        <small class="hint">// 启用后由AI补全剩余玩家</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term" for="categorySelect">Word Category</label>
+                        <select class="select" id="categorySelect">
+                            <option value="水果">水果</option>
+                            <option value="家禽">家禽</option>
+                            <option value="电子产品">电子产品</option>
+                            <option value="动物">动物</option>
+                            <option value="交通工具">交通工具</option>
+                            <option value="颜色">颜色</option>
+                            <option value="食物">食物</option>
+                            <option value="职业">职业</option>
+                            <option value="娱乐">娱乐</option>
+                            <option value="地点">地点</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term">Difficulty</label>
+                        <div class="mode-selector" id="difficultySelector">
+                            <button class="mode-btn" data-diff="easy" type="button">简单</button>
+                            <button class="mode-btn active" data-diff="normal" type="button">普通</button>
+                            <button class="mode-btn" data-diff="hard" type="button">困难</button>
+                        </div>
+                        <small class="hint" id="difficultyHint">// 困难：形容词强化的近似词对（如 冰镇西瓜 / 常温西瓜）</small>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" id="createRoomBtn" type="button">» 创建房间</button>
+                </div>
+
+                <!-- 其余 4 个联机游戏精简表单（昵称=账号名） -->
+                <div class="create-card" id="simpleForm" style="display:none;">
+                    <div class="form-group">
+                        <label class="label-term">Operator</label>
+                        <div class="operator-readonly" id="simpleOperator">操作员: ---</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term" for="simpleRoomName">Room Name</label>
+                        <input class="input" type="text" id="simpleRoomName" placeholder="输入房间名称" value="我的房间">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term">Password <span class="opt">(可选)</span></label>
+                        <input class="input" type="text" id="simplePassword" placeholder="留空表示无密码" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term">Capacity</label>
+                        <div class="mode-selector" id="simpleCountSelector">
+                            <button class="mode-btn" data-count="2" type="button">02</button>
+                            <button class="mode-btn active" data-count="4" type="button">04</button>
+                            <button class="mode-btn" data-count="6" type="button">06</button>
+                            <button class="mode-btn" data-count="8" type="button">08</button>
+                            <button class="mode-btn" data-count="10" type="button">10</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-term">Difficulty</label>
+                        <div class="mode-selector" id="simpleDifficultySelector">
+                            <button class="mode-btn" data-diff="easy" type="button">简单</button>
+                            <button class="mode-btn active" data-diff="normal" type="button">普通</button>
+                            <button class="mode-btn" data-diff="hard" type="button">困难</button>
+                        </div>
+                        <small class="hint" id="simpleDiffHint">// 困难：拆弹阻碍加密 / 出题更冷门</small>
+                    </div>
+
+                    <div class="form-group">
+                        <small class="hint" id="simpleDesc">// 规则说明</small>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" id="simpleCreateBtn" type="button">» 创建房间</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- 底部 -->
+        <footer class="hall-footer">
+            <div class="hidden-terminal" id="hiddenTerminal" title="隐藏终端 — 输入 help 试试">
+                <div class="term-output">
+                    <div class="term-line">// 隐藏终端已就绪 // 输入 help 查看指令</div>
+                </div>
+                <div class="term-input-row">
+                    <span class="term-prompt">&gt;</span>
+                    <input class="term-input" type="text" spellcheck="false" autocomplete="off" placeholder="输入指令后回车...">
+                </div>
+            </div>
+            <div class="footer-line">
+                <span>MPOSTOR v2.1</span>
+                <span>|</span>
+                <span>卧底 · 拆弹 · 接龙 · 海龟汤 · 问答</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 密码弹窗 -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-modal-content">
+            <div class="panel-header">
+                <span class="panel-title">Access Lock</span>
+            </div>
+            <h3>// 请输入房间密码</h3>
+            <p id="passwordRoomName">房间: 未命名</p>
+            <input class="input" type="password" id="passwordInput" placeholder="请输入密码">
+            <div class="password-actions">
+                <button class="btn" id="passwordCancelBtn">取消</button>
+                <button class="btn btn-primary" id="passwordConfirmBtn">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 任务配置</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="setup-container">
+        <header class="setup-header">
+            <a href="../../../index.html" class="back-link">← 返回首页</a>
+            <h1>// 任务配置 <span class="tag">SETUP</span></h1>
+            <span class="room-info" id="roomInfo">房间: ---</span>
+        </header>
+
+        <main class="setup-main">
+            <!-- 玩家列表 -->
+            <section class="setup-section panel">
+                <div class="panel-header">
+                    <span class="panel-title">Units</span>
+                    <button class="btn btn-sm" id="refreshPlayersBtn">随机分配</button>
+                </div>
+                <div class="players-grid" id="playersGrid"></div>
+                <div class="player-hint">
+                    <span>■ 你: <strong id="myPlayerName">玩家1</strong></span>
+                    <span>◎ AI玩家: <strong id="aiPlayerCount">4</strong> 人</span>
+                </div>
+            </section>
+
+            <!-- 词语设置 -->
+            <section class="setup-section panel">
+                <div class="panel-header">
+                    <span class="panel-title">Word Config</span>
+                    <span class="tag">WORDS</span>
+                </div>
+                <div class="word-settings">
+                    <div class="word-row">
+                        <label class="label-term">Word Source</label>
+                        <div class="radio-group" id="wordSourceGroup">
+                            <label class="radio-item active" data-value="ai">
+                                <input type="radio" name="wordSource" value="ai" checked>
+                                AI生成
+                            </label>
+                            <label class="radio-item" data-value="manual">
+                                <input type="radio" name="wordSource" value="manual">
+                                手动输入
+                            </label>
+                        </div>
+                    </div>
+                    <div id="wordInputArea">
+                        <!-- 动态渲染 -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 开始 -->
+            <button class="btn btn-primary btn-block btn-start" id="startGameBtn">» 开始游戏</button>
+        </main>
+
+        <!-- 加载遮罩：开机自检风 -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="boot-lines" id="bootLines">
+                    <div class="boot-line">> LINKING BACKEND .....</div>
+                    <div class="boot-line">> ROLLING WORD PAIR ....</div>
+                    <div class="boot-line">> ASSIGNING ROLES ......</div>
+                    <div class="boot-line">> CALIBRATING SCANLINE .</div>
+                    <div class="boot-line ok">>> DEPLOYING UNDERCOVER</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

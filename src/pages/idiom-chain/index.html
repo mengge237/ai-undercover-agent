@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 成语接龙</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="idiom-container">
+        <header class="idiom-header">
+            <a href="../../../index.html" class="back-link">← 返回首页</a>
+            <h1 class="glitch-text" data-text="成语接龙">成语接龙</h1>
+            <div class="header-right">
+                <span class="status" id="gameStatus">待命</span>
+                <button class="btn btn-sm" id="muteBtn">SOUND: ON</button>
+            </div>
+        </header>
+
+        <main class="idiom-main">
+            <!-- 末字指示 -->
+            <div class="lastchar-panel panel">
+                <div class="lastchar-label">// 下一词首字</div>
+                <div class="lastchar-box" id="lastCharBox">
+                    <span class="bracket">[</span>
+                    <span class="lastchar-value" id="lastCharDisplay">—</span>
+                    <span class="bracket">]</span>
+                </div>
+                <div class="lastchar-hint" id="lastCharHint">AI 正在出首词...</div>
+            </div>
+
+            <!-- 接龙链条 -->
+            <div class="chain-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Chain Log</span>
+                    <span class="tag" id="roundTag">ROUND 0</span>
+                </div>
+                <div class="chain-log" id="chainLog">
+                    <div class="empty-hint">// 等待 AI 出首词，开始接龙</div>
+                </div>
+            </div>
+
+            <!-- 输入行 -->
+            <div class="idiom-input-row panel">
+                <span class="prompt">&gt;</span>
+                <input type="text" id="idiomInput" class="input" placeholder="输入四字成语..." maxlength="4" autocomplete="off">
+                <button class="mic-btn" type="button" title="语音输入">REC</button>
+                <button class="btn btn-primary" id="idiomPlayBtn">接龙</button>
+                <button class="btn" id="idiomNewBtn">重置</button>
+            </div>
+            <div class="feedback-line" id="idiomFeedback"></div>
+
+            <!-- 结局弹窗 -->
+            <div class="game-over" id="idiomOverPanel" style="display:none;">
+                <div class="game-over-content">
+                    <div class="result-icon" id="idiomResultIcon">▣</div>
+                    <h2 class="glitch-text" id="idiomResultTitle" data-text="AI 认输">AI 认输</h2>
+                    <p class="result-desc" id="idiomResultDesc"></p>
+                    <button class="btn btn-primary" id="idiomAgainBtn">再来一轮</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

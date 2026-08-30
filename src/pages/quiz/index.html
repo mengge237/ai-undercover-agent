@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 趣味问答</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="quiz-container">
+        <header class="quiz-header">
+            <a href="../../../index.html" class="back-link">← 返回首页</a>
+            <h1 class="glitch-text" data-text="趣味问答">趣味问答</h1>
+            <div class="header-right">
+                <span class="status" id="gameStatus">就绪</span>
+                <button class="btn btn-sm" id="muteBtn">SOUND: ON</button>
+            </div>
+        </header>
+
+        <main class="quiz-main">
+            <!-- 状态条 -->
+            <div class="quiz-bar panel">
+                <div class="bar-item">
+                    <span class="bar-label">// 进度</span>
+                    <div class="progress-segs" id="progressSegs"></div>
+                </div>
+                <div class="bar-item">
+                    <span class="bar-label">// 得分</span>
+                    <span class="score-value" id="scoreDisplay">0</span>
+                </div>
+                <div class="bar-item">
+                    <span class="bar-label">// 题源</span>
+                    <span class="tag" id="quizSource">SOURCE</span>
+                </div>
+            </div>
+
+            <!-- 题目 -->
+            <div class="question-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Question</span>
+                    <span class="tag" id="questionNo">1 / 5</span>
+                </div>
+                <p class="question-text" id="quizQuestion">AI 正在出题...</p>
+                <div class="options-grid" id="quizOptions"></div>
+                <div class="feedback-line" id="quizFeedback"></div>
+            </div>
+
+            <!-- 结算弹窗 -->
+            <div class="game-over" id="quizOverPanel" style="display:none;">
+                <div class="game-over-content">
+                    <div class="result-icon" id="quizResultIcon">✓</div>
+                    <h2 class="glitch-text" id="quizResultTitle" data-text="答卷完毕">答卷完毕</h2>
+                    <p class="result-desc" id="quizResultDesc"></p>
+                    <button class="btn btn-primary" id="quizAgainBtn">再来一局</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

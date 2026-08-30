@@ -1,0 +1,492 @@
+/* ============================================================
+   MPOSTOR 游戏大厅 · 工业终端风
+   ============================================================ */
+
+.hall-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ---------- 页眉 ---------- */
+.hall-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-bright);
+    position: relative;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.hall-header::after {
+    content: '+';
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    transform: translateX(-50%);
+    background: var(--bg);
+    color: var(--green-dim);
+    padding: 0 8px;
+    font-family: var(--mono);
+    line-height: 1;
+}
+
+.logo {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.back-link {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    transition: all .12s;
+}
+.back-link:hover {
+    color: var(--green);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.logo-mark {
+    color: var(--green);
+    text-shadow: var(--glow-strong);
+    animation: ledPulse 2s infinite;
+    cursor: pointer;
+    user-select: none;
+}
+
+.logo-text {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.logo-sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    color: var(--text-dim);
+    padding-left: 10px;
+    border-left: 1px solid var(--line);
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+.status-sep { color: var(--text-faint); }
+
+.player-id {
+    padding: 3px 10px;
+    border: 1px dashed var(--line-bright);
+    color: var(--green);
+    text-shadow: var(--glow);
+}
+
+/* script.js 直接赋 className，这里把 status-dot 做成 LED */
+.status-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: var(--text-faint);
+    border: 1px solid var(--line);
+}
+.status-dot.online     { background: var(--green); border-color: var(--green); box-shadow: var(--glow-strong); animation: ledPulse 2s infinite; }
+.status-dot.offline    { background: #1a0e0e; border-color: var(--red); }
+.status-dot.connecting { background: var(--amber); border-color: var(--amber); box-shadow: 0 0 8px rgba(255,179,0,.6); animation: ledBlink 1s steps(1) infinite; }
+
+/* ---------- 主区域 ---------- */
+.hall-main {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 18px;
+    align-items: start;
+}
+
+/* ---------- 房间列表 ---------- */
+.room-list-section .room-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 520px;
+    overflow-y: auto;
+}
+
+.room-hint {
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: .04em;
+    border-left: 2px solid var(--green-dark);
+    padding-left: 10px;
+}
+
+.room-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--green-dim);
+    background: var(--panel-2);
+    transition: all .12s steps(2);
+    flex-wrap: wrap;
+}
+
+.room-card:hover {
+    border-color: var(--line-bright);
+    border-left-color: var(--green);
+}
+
+.room-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
+.room-name {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.room-detail {
+    display: flex;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    flex-wrap: wrap;
+}
+
+.real-player-badge {
+    color: var(--green);
+    border: 1px solid var(--green-dim);
+    padding: 0 6px;
+    font-size: 10px;
+}
+
+.preset-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--amber);
+    border: 1px solid var(--amber);
+    padding: 1px 6px;
+    letter-spacing: .1em;
+}
+
+.room-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+.room-status.waiting { color: var(--green); border-color: var(--green-dim); }
+.room-status.playing { color: var(--amber); border-color: var(--amber); animation: ledBlink 1.2s steps(1) infinite; }
+.room-status.ended   { color: var(--text-faint); }
+
+.room-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* 房间操作按钮统一样式 */
+.btn-join, .btn-start-game, .btn-leave, .btn-reset, .btn-close, .btn-kick {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    padding: 5px 12px;
+    cursor: pointer;
+    background: var(--panel);
+    border: 1px solid var(--line-bright);
+    color: var(--green);
+    white-space: nowrap;
+    transition: all .12s steps(2);
+}
+
+.btn-join:hover:not(:disabled), .btn-start-game:hover:not(:disabled),
+.btn-leave:hover:not(:disabled), .btn-reset:hover:not(:disabled) {
+    background: var(--green-dark);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.btn-join:disabled, .btn-start-game:disabled {
+    color: var(--text-faint);
+    border-color: var(--line);
+    background: #051008;
+    cursor: not-allowed;
+}
+
+.btn-join.joined { color: var(--text-dim); border-color: var(--line); cursor: default; }
+
+.btn-start-game {
+    background: var(--green-dark);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+    font-weight: 700;
+}
+
+.btn-leave { color: var(--amber); border-color: var(--amber); }
+.btn-leave:hover:not(:disabled) {
+    background: rgba(255, 179, 0, .15);
+    border-color: var(--amber);
+    box-shadow: 0 0 10px rgba(255, 179, 0, .5);
+}
+
+.btn-reset { color: var(--amber); border-color: var(--amber); }
+
+.btn-close { color: var(--red); border-color: var(--red); background: rgba(255,59,59,.06); }
+.btn-close:hover:not(:disabled) {
+    background: rgba(255, 59, 59, .15);
+    box-shadow: 0 0 10px rgba(255, 59, 59, .5);
+}
+
+.btn-kick { color: var(--red); border-color: var(--red); padding: 5px 8px; }
+
+/* ---------- 创建房间 ---------- */
+.create-room-section { position: sticky; top: 20px; }
+
+.create-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-group .opt { color: var(--text-faint); font-weight: 400; letter-spacing: 0; }
+
+.hint {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-faint);
+    margin-top: 5px;
+    letter-spacing: .05em;
+}
+
+.mode-selector, .toggle-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.toggle-group { grid-template-columns: 1fr 1fr; }
+
+.mode-btn, .toggle-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    padding: 8px 4px;
+    background: var(--panel-2);
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: all .12s steps(2);
+}
+
+.mode-btn:hover, .toggle-btn:hover {
+    border-color: var(--line-bright);
+    color: var(--text);
+}
+
+.mode-btn.active, .toggle-btn.active {
+    background: var(--green-dark);
+    color: var(--green);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+    box-shadow: inset 0 0 12px rgba(0, 255, 65, .15);
+}
+
+/* ---------- 密码弹窗 ---------- */
+.password-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 8, 2, .85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9500;
+}
+.password-modal.active { display: flex; }
+
+.password-modal-content {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    box-shadow: 0 0 40px rgba(0, 255, 65, .15);
+    padding: 22px;
+    width: 360px;
+    max-width: 92vw;
+    animation: modalIn .18s steps(4);
+    /* 四角角框 */
+    background-image:
+        linear-gradient(var(--green) 0 0), linear-gradient(var(--green) 0 0),
+        linear-gradient(var(--green) 0 0), linear-gradient(var(--green) 0 0),
+        linear-gradient(var(--green) 0 0), linear-gradient(var(--green) 0 0),
+        linear-gradient(var(--green) 0 0), linear-gradient(var(--green) 0 0);
+    background-position:
+        top left, top right, bottom left, bottom right,
+        top left, top right, bottom left, bottom right;
+    background-size:
+        14px 2px, 14px 2px, 14px 2px, 14px 2px,
+        2px 14px, 2px 14px, 2px 14px, 2px 14px;
+    background-repeat: no-repeat;
+}
+
+.password-modal-content h3 {
+    font-size: 14px;
+    color: var(--green);
+    text-shadow: var(--glow);
+    margin-bottom: 6px;
+}
+
+.password-modal-content p {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    font-family: var(--mono);
+}
+
+.password-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+/* ---------- 页脚 ---------- */
+.hall-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+}
+
+.footer-line {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: .12em;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 860px) {
+    .hall-main { grid-template-columns: 1fr; }
+    .create-room-section { position: static; }
+}
+
+/* ============================================================
+   二期新增：选项卡 / 账号 / 类型徽章
+   ============================================================ */
+
+/* ---------- 游戏类型选项卡 ---------- */
+.tab-bar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    padding: 8px 16px;
+    background: var(--panel-2);
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: all .12s steps(2);
+}
+
+.tab-btn:hover {
+    border-color: var(--line-bright);
+    color: var(--text);
+}
+
+.tab-btn.active {
+    background: var(--green-dark);
+    color: var(--green);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+    box-shadow: inset 0 0 12px rgba(0, 255, 65, .15);
+}
+
+/* ---------- 账号 ---------- */
+.account-chip {
+    padding: 3px 10px;
+    border: 1px solid var(--green-dim);
+    background: var(--green-dark);
+    color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.operator-readonly {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .06em;
+    color: var(--green);
+    text-shadow: var(--glow);
+    padding: 9px 12px;
+    background: #041008;
+    border: 1px solid var(--line);
+}
+
+/* ---------- 房间类型徽章 ---------- */
+.type-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    border: 1px solid var(--green-dim);
+    padding: 1px 6px;
+    letter-spacing: .1em;
+    white-space: nowrap;
+}
+
+/* 难度徽章：easy 绿 / normal 琥珀 / hard 红 */
+.diff-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 1px 6px;
+    letter-spacing: .1em;
+    white-space: nowrap;
+    border: 1px solid;
+}
+.diff-badge.diff-easy { color: var(--green); border-color: var(--green-dim); }
+.diff-badge.diff-normal { color: var(--amber); border-color: var(--amber); }
+.diff-badge.diff-hard { color: var(--red); border-color: var(--red); }

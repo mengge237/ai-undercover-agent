@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 任务结算</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="result-container">
+        <header class="result-header">
+            <a href="../../../index.html" class="back-link">← 返回首页</a>
+            <span class="result-room" id="resultRoomId">房间: ---</span>
+        </header>
+
+        <main class="result-main">
+            <div class="result-hero panel">
+                <div class="result-icon" id="resultIcon">◆</div>
+                <h1 class="glitch-text" id="resultTitle" data-text="游戏结束">游戏结束</h1>
+                <p id="resultSubtitle"></p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card panel">
+                    <div class="stat-number" id="totalPlayers">0</div>
+                    <div class="stat-label">// 总人数</div>
+                </div>
+                <div class="stat-card panel">
+                    <div class="stat-number" id="roundsPlayed">0</div>
+                    <div class="stat-label">// 轮数</div>
+                </div>
+                <div class="stat-card panel">
+                    <div class="stat-number" id="eliminatedCount">0</div>
+                    <div class="stat-label">// 淘汰</div>
+                </div>
+                <div class="stat-card panel highlight">
+                    <div class="stat-number" id="winnerDisplay">---</div>
+                    <div class="stat-label">// 获胜方</div>
+                </div>
+            </div>
+
+            <div class="word-reveal panel">
+                <span>平民词: <strong id="civilianWord">---</strong></span>
+                <span class="reveal-sep">|</span>
+                <span>卧底词: <strong id="undercoverWord">---</strong></span>
+            </div>
+
+            <div class="players-detail panel">
+                <div class="panel-header">
+                    <span class="panel-title">Unit Report</span>
+                    <span class="tag">ROLES</span>
+                </div>
+                <div class="players-grid" id="playersDetailGrid"></div>
+            </div>
+
+            <div class="review-section panel">
+                <div class="panel-header">
+                    <span class="panel-title">Speech Review</span>
+                    <span class="tag">TRANSCRIPT</span>
+                </div>
+                <div class="review-tabs">
+                    <button class="review-tab active" data-round="all">全部</button>
+                </div>
+                <div class="review-list" id="reviewList"></div>
+            </div>
+
+            <div class="result-actions">
+                <button class="btn btn-primary" id="replayBtn">再来一局</button>
+                <button class="btn" id="homeBtn">返回大厅</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

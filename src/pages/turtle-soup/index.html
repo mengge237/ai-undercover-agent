@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 海龟汤</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="turtle-container">
+        <header class="turtle-header">
+            <a href="../../../index.html" class="back-link">← 返回首页</a>
+            <h1 class="glitch-text" data-text="海龟汤">海龟汤</h1>
+            <div class="header-right">
+                <span class="status" id="gameStatus">就绪</span>
+                <button class="btn btn-sm" id="muteBtn">SOUND: ON</button>
+            </div>
+        </header>
+
+        <main class="turtle-main">
+            <!-- 汤面 -->
+            <div class="story-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Soup Surface</span>
+                    <span class="tag" id="turtleSource">SOURCE</span>
+                </div>
+                <p class="story-text" id="turtleStory">正在熬汤...</p>
+            </div>
+
+            <!-- 推理日志 -->
+            <div class="log-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Interrogation Log</span>
+                    <span class="tag" id="questionCount">Q:0</span>
+                </div>
+                <div class="turtle-log" id="turtleLog">
+                    <div class="empty-hint">// 向 AI 主持提问，答案只有：是 / 否 / 无法确定</div>
+                </div>
+            </div>
+
+            <!-- 提问输入 -->
+            <div class="ask-area panel">
+                <span class="prompt">&gt;</span>
+                <input type="text" id="turtleInput" class="input" placeholder="提问，例如：他是在白天出事的吗？" maxlength="100">
+                <button class="mic-btn" type="button" title="语音输入">REC</button>
+                <button class="btn btn-primary" id="askBtn">提问</button>
+                <button class="btn" id="guessBtn">猜汤底</button>
+                <button class="btn" id="revealBtn">公布答案</button>
+                <button class="btn" id="newBtn">新汤</button>
+            </div>
+
+            <!-- 揭晓弹窗 -->
+            <div class="game-over" id="revealPanel" style="display:none;">
+                <div class="game-over-content">
+                    <div class="result-icon" id="revealIcon">◍</div>
+                    <h2 class="glitch-text" id="revealTitle" data-text="汤底揭晓">汤底揭晓</h2>
+                    <p class="reveal-answer" id="revealAnswer"></p>
+                    <button class="btn btn-primary" id="revealAgainBtn">再来一汤</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

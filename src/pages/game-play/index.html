@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 对局进行中</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="game-container">
+        <!-- 顶部 -->
+        <header class="game-header">
+            <a href="../../../index.html" class="back-link">← 退出</a>
+            <div class="game-info">
+                <span class="room-id" id="roomIdDisplay">房间: ---</span>
+                <span class="round-display" id="roundDisplay">第 1 轮</span>
+            </div>
+            <div class="game-status">
+                <span class="player-count" id="playerCount">6人</span>
+                <span class="status-badge" id="statusBadge">发言中</span>
+                <button class="btn btn-sm" id="muteBtn" title="音效开关">SND:ON</button>
+            </div>
+        </header>
+
+        <!-- 主体 -->
+        <main class="game-main">
+            <!-- 左侧：玩家列表 -->
+            <aside class="players-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Units</span>
+                    <span class="tag">PLAYERS</span>
+                </div>
+                <div class="players-list" id="playersList"></div>
+                <div class="panel-footer">
+                    <span>已发言: <strong id="spokenCount">0/6</strong></span>
+                    <span>当前: <strong id="currentPlayerName">等待</strong></span>
+                </div>
+            </aside>
+
+            <!-- 中间：游戏区 -->
+            <section class="game-area">
+                <!-- 待命阶段：等待开局 -->
+                <div class="phase-wait panel" id="phaseWait">
+                    <div class="wait-header">
+                        <h2>// 待命区 <span class="tag">STANDBY</span></h2>
+                        <p>房间已就绪，等待游戏开始</p>
+                    </div>
+                    <div class="wait-body">
+                        <div class="wait-status-led" id="waitStatusLed"></div>
+                        <p class="wait-status-text" id="waitStatusText">等待房主开始游戏...</p>
+                        <p class="wait-room-info" id="waitRoomInfo">房间: ---</p>
+                        <button class="btn btn-primary btn-block" id="startGameBtn" style="display:none;">» 开始游戏</button>
+                        <button class="btn btn-alert btn-block" id="closeRoomBtn" style="display:none;">解散房间</button>
+                    </div>
+                </div>
+
+                <!-- 发言阶段 -->
+                <div class="phase-speak panel" id="phaseSpeak" style="display:none;">
+                    <div class="speak-header">
+                        <h2>// 发言阶段 <span class="tag">SPEAK</span></h2>
+                        <p>用一句话描述你的词语</p>
+                    </div>
+
+                    <div class="speaker-info">
+                        <span class="speaker-name" id="speakerName">等待发言</span>
+                        <span class="speaker-word" id="speakerWordHint">你的词: ???</span>
+                    </div>
+
+                    <div class="speak-input-area">
+                        <textarea class="textarea" id="speakInput" placeholder="输入你的描述..." rows="3" maxlength="200"></textarea>
+                        <div class="speak-actions">
+                            <span class="char-count" id="charCount">0/200</span>
+                            <button class="btn btn-primary" id="submitSpeakBtn" disabled>提交</button>
+                        </div>
+                    </div>
+
+                    <div class="speak-history">
+                        <div class="history-title">// 发言记录 <span class="tag dim">LOG</span></div>
+                        <div class="history-list" id="historyList">
+                            <div class="empty-hint">等待发言...</div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-warn btn-block" id="endSpeakBtn" disabled>进入投票</button>
+                </div>
+
+                <!-- 投票阶段 -->
+                <div class="phase-vote panel" id="phaseVote" style="display:none;">
+                    <div class="vote-header">
+                        <h2>// 投票阶段 <span class="tag warn">VOTE</span></h2>
+                        <p>选择最可疑的玩家</p>
+                    </div>
+
+                    <!-- 可折叠的聊天记录 -->
+                    <div class="vote-chat-history">
+                        <div class="chat-toggle" id="chatToggle">
+                            <span>// 查看发言记录</span>
+                            <span class="toggle-arrow">▾</span>
+                        </div>
+                        <div class="chat-content" id="chatContent" style="display:none;">
+                            <div class="chat-list" id="chatList">
+                                <!-- 动态渲染发言记录 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vote-candidates" id="voteCandidates"></div>
+
+                    <button class="btn btn-primary btn-block" id="confirmVoteBtn" disabled>确认投票</button>
+
+                    <div class="vote-result" id="voteResult" style="display:none;">
+                        <div class="result-chart" id="resultChart"></div>
+                        <button class="btn btn-alert btn-block" id="eliminateBtn">淘汰最高票</button>
+                    </div>
+                </div>
+
+                <!-- 游戏结束 -->
+                <div class="phase-gameover panel" id="phaseGameOver" style="display:none;">
+                    <div class="gameover-content">
+                        <div class="gameover-icon" id="gameoverIcon">◆</div>
+                        <h2 id="gameoverTitle">游戏结束</h2>
+                        <p id="gameoverDesc"></p>
+                        <div class="gameover-details" id="gameoverDetails"></div>
+                        <button class="btn btn-primary btn-block" id="goToResultBtn">查看结果 →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 右侧：日志 -->
+            <aside class="log-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Sys Log</span>
+                    <span class="led on"></span>
+                </div>
+                <div class="log-list" id="logList">
+                    <div class="log-entry system">游戏开始</div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
