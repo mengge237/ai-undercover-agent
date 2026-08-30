@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 拆弹专家</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="bomb-container">
+        <header class="bomb-header">
+            <a href="../../../index.html" class="back-link">← 返回首页</a>
+            <h1 class="glitch-text" data-text="拆弹专家">拆弹专家</h1>
+            <div class="header-right">
+                <span class="status" id="gameStatus">待命</span>
+                <button class="btn btn-sm" id="muteBtn">SOUND: ON</button>
+            </div>
+        </header>
+
+        <main class="bomb-main">
+            <!-- 区间显示 -->
+            <div class="range-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Defuse Panel</span>
+                    <span class="tag" id="attemptTag">WIRES LEFT --</span>
+                </div>
+                <div class="range-display">
+                    <span class="range-num" id="lowDisplay">1</span>
+                    <div class="range-line">
+                        <div class="range-fill" id="rangeFill"></div>
+                        <div class="range-marker" id="rangeMarker"></div>
+                    </div>
+                    <span class="range-num" id="highDisplay">100</span>
+                </div>
+                <div class="range-sub">// 引爆密码藏在区间某处，剪对密码线即可拆弹 // 剪错会消耗剪线次数</div>
+            </div>
+
+            <!-- 难度选择 -->
+            <div class="panel diff-panel">
+                <div class="panel-header">
+                    <span class="panel-title">Difficulty</span>
+                    <span class="tag">THREAT LEVEL</span>
+                </div>
+                <div class="mode-selector" id="bombDifficultySelector">
+                    <button class="mode-btn" data-diff="easy" type="button">简单</button>
+                    <button class="mode-btn active" data-diff="normal" type="button">普通</button>
+                    <button class="mode-btn" data-diff="hard" type="button">困难</button>
+                </div>
+                <div class="range-sub">// 简单：无障碍线 // 普通：少量干扰线+熔断线 // 困难：阻碍加密，纯二分法走不通</div>
+            </div>
+
+            <!-- 猜数输入 -->
+            <div class="guess-area panel">
+                <span class="prompt">&gt;</span>
+                <input type="number" id="bombInput" class="input" placeholder="输入要剪的线号..." min="1" max="100">
+                <button class="btn btn-primary" id="bombGuessBtn">剪线</button>
+                <button class="btn" id="bombNewBtn">重置</button>
+            </div>
+
+            <!-- 拆弹日志 -->
+            <div class="log-panel panel">
+                <div class="panel-header">
+                    <span class="panel-title">Defuse Log</span>
+                    <span class="tag">EOD</span>
+                </div>
+                <div class="bomb-log" id="bombLog">
+                    <div class="empty-hint">// 输入区间内的线号，开始剪线</div>
+                </div>
+            </div>
+
+            <!-- 结局弹窗 -->
+            <div class="game-over" id="bombOverPanel" style="display:none;">
+                <div class="game-over-content">
+                    <div class="result-icon" id="bombResultIcon">◌</div>
+                    <h2 class="glitch-text" id="bombResultTitle" data-text="BOOM">BOOM</h2>
+                    <p class="result-desc" id="bombResultDesc"></p>
+                    <button class="btn btn-primary" id="bombAgainBtn">再来一轮</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "mpostor",
+  "version": "2.0.0",
+  "description": "MPOSTOR - AI 谁是卧底游戏平台 · 工业终端风",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "npx live-server --port=3000 --entry-file=index.html",
+    "setup": "node setup-project.js"
+  },
+  "keywords": ["AI", "multi-agent", "game", "undercover", "mpostor"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

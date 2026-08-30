@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 猜词终端</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="guess-container">
+        <header class="guess-header">
+            <a href="../../../index.html" class="back-link">← 返回首页</a>
+            <h1 class="glitch-text" data-text="猜词终端">猜词终端</h1>
+            <div class="header-right">
+                <span class="status" id="gameStatus">运行中</span>
+                <button class="btn btn-sm" id="muteBtn">SOUND: ON</button>
+            </div>
+        </header>
+
+        <main class="guess-main">
+            <!-- 游戏信息 -->
+            <div class="guess-info panel">
+                <div class="info-item">
+                    <span class="info-label">// 目标词</span>
+                    <span class="info-value slots" id="targetLength">[ _ ] [ _ ] [ _ ] [ _ ]</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">// 已猜次数</span>
+                    <span class="info-value" id="attemptCount">0</span><span class="info-label">/ 10</span>
+                </div>
+                <div class="info-item info-hint">
+                    <span class="info-label">// 提示</span>
+                    <span class="info-value" id="hintDisplay">输入词语，系统会给出提示</span>
+                </div>
+            </div>
+
+            <!-- 猜词输入 -->
+            <div class="guess-input-area panel">
+                <span class="prompt">&gt;</span>
+                <input type="text" id="guessInput" class="input" placeholder="输入你猜的词语..." maxlength="10">
+                <button class="mic-btn" type="button" title="语音输入">REC</button>
+                <button id="guessBtn" class="btn btn-primary">猜</button>
+                <button id="aiHintBtn" class="btn">AI 提示</button>
+                <button id="newGameBtn" class="btn">新游戏</button>
+            </div>
+
+            <!-- 猜词历史 -->
+            <div class="guess-history panel">
+                <div class="panel-header">
+                    <span class="panel-title">Guess Log</span>
+                    <span class="tag">TRANSCRIPT</span>
+                </div>
+                <div class="history-list" id="guessHistoryList">
+                    <div class="empty-hint">还没有猜词记录</div>
+                </div>
+            </div>
+
+            <!-- 游戏结束 -->
+            <div class="game-over" id="gameOverPanel" style="display:none;">
+                <div class="game-over-content">
+                    <div class="result-icon" id="resultIcon">◉</div>
+                    <h2 class="glitch-text" id="resultTitle" data-text="TARGET ACQUIRED">TARGET ACQUIRED</h2>
+                    <p id="resultDesc">你猜对了！</p>
+                    <button id="playAgainBtn" class="btn btn-primary">再来一局</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

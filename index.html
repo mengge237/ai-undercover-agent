@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 谁是卧底 · 工业终端</title>
+    <link rel="stylesheet" href="src/styles/theme.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="home-container">
+        <header class="home-header">
+            <div class="logo" data-mpostor-logo title="连点 5 次试试">
+                <span class="logo-mark">■</span>
+                <span class="logo-text glitch-text" data-text="MPOSTOR">MPOSTOR</span>
+                <span class="logo-sub cursor-blink">UNDERCOVER TERMINAL</span>
+            </div>
+            <div class="header-status">
+                <span class="led" id="statusDot"></span>
+                <span id="statusText">连接中...</span>
+                <span class="status-sep">|</span>
+                <span class="player-id" id="playerIdDisplay">玩家: ---</span>
+                <span class="account-chip" id="accountChip">账号: ---</span>
+                <button class="btn btn-sm" id="logoutBtn" title="退出登录">登出</button>
+                <button class="btn btn-sm" id="muteBtn" title="音效开关">SND:ON</button>
+            </div>
+        </header>
+
+        <section class="hero-section">
+            <h1 class="hero-title glitch-text" data-text="谁是卧底">谁是卧底</h1>
+            <p class="hero-desc">// FIND THE IMPOSTOR // 选择终端，随时开局</p>
+        </section>
+
+        <section class="game-grid">
+            <div class="game-card" id="undercoverCard">
+                <div class="game-card-icon">◆</div>
+                <div class="game-card-content">
+                    <h2 class="game-card-title">谁是卧底</h2>
+                    <p class="game-card-text">多人推理对战，找出隐藏的卧底</p>
+                    <div class="game-card-meta">
+                        <span class="tag">多人</span>
+                        <span class="tag">推理</span>
+                        <span class="tag warn">AI陪玩</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="undercoverBtn">» 启动终端</button>
+                <div class="game-card-scan"></div>
+            </div>
+
+            <div class="game-card" id="guessCard">
+                <div class="game-card-icon">?</div>
+                <div class="game-card-content">
+                    <h2 class="game-card-title">AI 猜词</h2>
+                    <p class="game-card-text">根据 AI 提示猜出目标词语</p>
+                    <div class="game-card-meta">
+                        <span class="tag">单人</span>
+                        <span class="tag">益智</span>
+                        <span class="tag warn">AI提示</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="guessBtn">» 启动终端</button>
+                <div class="game-card-scan"></div>
+            </div>
+
+            <div class="game-card" id="turtleCard">
+                <div class="game-card-icon">◍</div>
+                <div class="game-card-content">
+                    <h2 class="game-card-title">海龟汤</h2>
+                    <p class="game-card-text">AI 出题，是/否提问推理汤底</p>
+                    <div class="game-card-meta">
+                        <span class="tag">单人</span>
+                        <span class="tag">推理</span>
+                        <span class="tag warn">AI出题</span>
+                    </div>
+                </div>
+                <div class="game-card-actions">
+                    <a class="online-link" href="src/pages/game-hall/index.html?tab=turtle">联机对战 →</a>
+                </div>
+                <button class="btn btn-primary" id="turtleBtn">» 启动终端</button>
+                <div class="game-card-scan"></div>
+            </div>
+
+            <div class="game-card" id="quizCard">
+                <div class="game-card-icon">✓</div>
+                <div class="game-card-content">
+                    <h2 class="game-card-title">趣味问答</h2>
+                    <p class="game-card-text">AI 生成题目，连答五题</p>
+                    <div class="game-card-meta">
+                        <span class="tag">单人</span>
+                        <span class="tag">知识</span>
+                        <span class="tag warn">AI出题</span>
+                    </div>
+                </div>
+                <div class="game-card-actions">
+                    <a class="online-link" href="src/pages/game-hall/index.html?tab=quiz">联机对战 →</a>
+                </div>
+                <button class="btn btn-primary" id="quizBtn">» 启动终端</button>
+                <div class="game-card-scan"></div>
+            </div>
+
+            <div class="game-card" id="bombCard">
+                <div class="game-card-icon">✂</div>
+                <div class="game-card-content">
+                    <h2 class="game-card-title">拆弹专家</h2>
+                    <p class="game-card-text">倒计时剪线，破解引爆密码</p>
+                    <div class="game-card-meta">
+                        <span class="tag">单人</span>
+                        <span class="tag">心跳</span>
+                        <span class="tag">纯逻辑</span>
+                    </div>
+                </div>
+                <div class="game-card-actions">
+                    <a class="online-link" href="src/pages/game-hall/index.html?tab=bomb">联机对战 →</a>
+                </div>
+                <button class="btn btn-primary" id="bombBtn">» 启动终端</button>
+                <div class="game-card-scan"></div>
+            </div>
+
+            <div class="game-card" id="idiomCard">
+                <div class="game-card-icon">→</div>
+                <div class="game-card-content">
+                    <h2 class="game-card-title">成语接龙</h2>
+                    <p class="game-card-text">与 AI 轮流接龙，逼它认输</p>
+                    <div class="game-card-meta">
+                        <span class="tag">对战</span>
+                        <span class="tag">文化</span>
+                        <span class="tag warn">AI对战</span>
+                    </div>
+                </div>
+                <div class="game-card-actions">
+                    <a class="online-link" href="src/pages/game-hall/index.html?tab=idiom">联机对战 →</a>
+                </div>
+                <button class="btn btn-primary" id="idiomBtn">» 启动终端</button>
+                <div class="game-card-scan"></div>
+            </div>
+        </section>
+
+        <section class="room-section panel">
+            <div class="panel-header">
+                <span class="panel-title">Online Rooms</span>
+                <button class="btn btn-sm" id="refreshRoomsBtn" type="button">↻ 刷新</button>
+            </div>
+            <div class="room-list" id="roomList">
+                <div class="empty-state">
+                    <p>暂无房间</p>
+                    <span>点击上方「谁是卧底」创建房间</span>
+                </div>
+            </div>
+            <div class="room-hint">
+                &gt; 各游戏类型房间实时更新，点击「加入」进入大厅加入
+            </div>
+        </section>
+
+        <section class="room-section panel" id="statsPanel">
+            <!-- MPOSTOR.stats.renderPanel() 自动填充 -->
+        </section>
+
+        <!-- 成就栏：明确的成就陈列位置 -->
+        <section class="room-section panel" id="achPanel">
+            <!-- MPOSTOR.ach.renderPanel() 自动填充 -->
+        </section>
+
+        <footer class="home-footer">
+            <div class="hidden-terminal" id="hiddenTerminal" title="隐藏终端 — 输入 help 试试">
+                <div class="term-output">
+                    <div class="term-line">// 隐藏终端已就绪 // 输入 help 查看指令</div>
+                </div>
+                <div class="term-input-row">
+                    <span class="term-prompt">&gt;</span>
+                    <input class="term-input" type="text" spellcheck="false" autocomplete="off" placeholder="输入指令后回车...">
+                </div>
+            </div>
+            <span class="footer-text">MPOSTOR v2.1 // INDUSTRIAL TERMINAL // 2026</span>
+        </footer>
+    </div>
+
+    <script src="src/fun/mpostor.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

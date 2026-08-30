@@ -1,0 +1,116 @@
+/* style.css - 极简样式，无图标 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f0f0f0;
+    font-family: system-ui, Arial, sans-serif;
+    padding: 20px;
+}
+
+.app {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: normal;
+}
+
+.key-area {
+    background: #f5f5f5;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 24px;
+}
+
+.key-area label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.key-area input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 8px 16px;
+    background: #2c6e2c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #1e4a1e;
+}
+
+.single-area, .list-area {
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 6px;
+}
+
+#singleResult, #listResult {
+    padding: 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 100px;
+}
+
+.quote-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.quote-item:last-child {
+    border-bottom: none;
+}
+
+.quote-content {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.quote-author {
+    font-size: 13px;
+    color: #666;
+}
+
+.loading {
+    color: #888;
+}
+
+.error {
+    color: #c33;
+}

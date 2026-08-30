@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名言展示工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <h1>英语格言接口尝试</h1>
+        
+        <div class="key-area">
+            <label>API Key:</label>
+            <input type="password" id="apiKey" placeholder="请输入您的API Key">
+            <div class="btn-group">
+                <button id="getSingle">获取单条</button>
+                <button id="getList">获取列表</button>
+                <button id="getBoth">同时获取</button>
+            </div>
+        </div>
+
+        <div class="single-area">
+            <h2>单条名言</h2>
+            <div id="singleResult">点击按钮加载</div>
+        </div>
+
+        <div class="list-area">
+            <h2>名言列表</h2>
+            <div id="listResult">点击按钮加载</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

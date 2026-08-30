@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPOSTOR — 身份核验</title>
+    <link rel="stylesheet" href="../../styles/theme.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-mpostor-boot="on">
+    <div class="hazard"></div>
+
+    <div class="login-container">
+        <header class="login-header">
+            <div class="logo">
+                <a href="../../../index.html" class="back-link">← 返回</a>
+                <span class="logo-mark" data-mpostor-logo>■</span>
+                <span class="logo-text">MPOSTOR</span>
+                <span class="logo-sub">IDENTITY CHECK // 身份核验</span>
+            </div>
+        </header>
+
+        <div class="login-card panel">
+            <div class="panel-header">
+                <span class="panel-title">Access Terminal</span>
+                <span class="tag" id="modeTag">LOGIN</span>
+            </div>
+
+            <div class="mode-selector" id="modeSelector">
+                <button class="mode-btn active" data-mode="login" type="button">登 录</button>
+                <button class="mode-btn" data-mode="register" type="button">注 册</button>
+            </div>
+
+            <div class="form-group">
+                <label class="label-term" for="usernameInput">Operator ID</label>
+                <input class="input" type="text" id="usernameInput" placeholder="用户名（2-20 字符）" maxlength="20" autocomplete="username" spellcheck="false">
+            </div>
+
+            <div class="form-group">
+                <label class="label-term" for="passwordInput">Passcode</label>
+                <input class="input" type="password" id="passwordInput" placeholder="密码（4-32 字符）" maxlength="32" autocomplete="current-password">
+            </div>
+
+            <div class="feedback-line" id="feedbackLine">&gt; 输入凭证，回车或点击提交</div>
+
+            <button class="btn btn-primary btn-block" id="submitBtn" type="button">» 进入系统</button>
+            <small class="hint">// 全局账号：登录后战绩与成就按账号隔离</small>
+        </div>
+
+        <footer class="login-footer">
+            <span>MPOSTOR v2.1 // AUTH GATE // 2026</span>
+        </footer>
+    </div>
+
+    <script src="../../fun/mpostor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

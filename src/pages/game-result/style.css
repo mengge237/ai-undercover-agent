@@ -1,0 +1,333 @@
+/* ============================================================
+   MPOSTOR 任务结算 · 工业终端风
+   ============================================================ */
+
+.result-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ---------- 页眉 ---------- */
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-bright);
+    position: relative;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.result-header::after {
+    content: '+';
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    transform: translateX(-50%);
+    background: var(--bg);
+    color: var(--green-dim);
+    padding: 0 8px;
+    font-family: var(--mono);
+    line-height: 1;
+}
+
+.back-link {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    transition: all .12s;
+}
+.back-link:hover {
+    color: var(--green);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.result-room {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    padding: 3px 10px;
+    border: 1px dashed var(--line-bright);
+}
+
+/* ---------- 主区域 ---------- */
+.result-main {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ---------- 结果 HERO ---------- */
+.result-hero {
+    text-align: center;
+    padding: 34px 16px;
+    animation: fadeIn .5s steps(6);
+}
+
+.result-icon {
+    font-family: var(--mono);
+    font-size: 46px;
+    color: var(--green);
+    text-shadow: var(--glow-strong);
+    animation: ledPulse 1.6s infinite;
+}
+
+.result-hero h1 {
+    font-size: 30px;
+    color: var(--green);
+    letter-spacing: .16em;
+    text-shadow: var(--glow-strong);
+    margin: 10px 0 8px;
+}
+
+.result-hero p {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    letter-spacing: .08em;
+}
+
+/* ---------- 统计卡 ---------- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 18px 8px;
+}
+
+.stat-card.highlight {
+    border-color: var(--amber);
+}
+.stat-card.highlight .stat-number { color: var(--amber); text-shadow: 0 0 10px rgba(255, 179, 0, .6); }
+
+.stat-number {
+    font-family: var(--mono);
+    font-size: 22px;
+    color: var(--green);
+    text-shadow: var(--glow);
+    word-break: break-all;
+}
+
+.stat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: .1em;
+    margin-top: 6px;
+}
+
+/* ---------- 词语揭晓 ---------- */
+.word-reveal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    color: var(--text-dim);
+    flex-wrap: wrap;
+}
+
+.word-reveal strong {
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--amber);
+    text-shadow: 0 0 8px rgba(255, 179, 0, .5);
+    letter-spacing: .1em;
+    margin-left: 6px;
+}
+
+.reveal-sep { color: var(--text-faint); font-family: var(--mono); }
+
+/* ---------- 玩家详情 ---------- */
+.players-detail .players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 10px;
+}
+
+.player-detail-card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--green-dim);
+    background: var(--panel-2);
+    padding: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    animation: fadeIn .4s steps(5);
+}
+
+.player-detail-card.undercover {
+    border-left-color: var(--red);
+    border-color: rgba(255, 59, 59, .5);
+    background: rgba(255, 59, 59, .05);
+}
+
+.player-detail-card.eliminated { opacity: .5; }
+
+.player-detail-avatar {
+    font-family: var(--mono);
+    font-size: 22px;
+    color: var(--green);
+    border: 1px solid var(--line-bright);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    position: relative;
+}
+
+.player-detail-card.undercover .player-detail-avatar { color: var(--red); border-color: var(--red); }
+
+.eliminated-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 12px;
+    color: var(--red);
+    text-shadow: 0 0 6px rgba(255, 59, 59, .7);
+}
+
+.player-detail-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.player-detail-role {
+    font-size: 11px;
+    color: var(--green);
+    font-family: var(--mono);
+    letter-spacing: .08em;
+    margin: 2px 0;
+}
+
+.player-detail-card.undercover .player-detail-role { color: var(--red); }
+
+.player-detail-word {
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+.player-detail-status {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    white-space: nowrap;
+}
+
+/* ---------- 发言复盘 ---------- */
+.review-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.review-tab {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    padding: 5px 14px;
+    background: var(--panel-2);
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: all .12s steps(2);
+}
+
+.review-tab:hover { border-color: var(--line-bright); color: var(--text); }
+
+.review-tab.active {
+    background: var(--green-dark);
+    color: var(--green);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.review-list {
+    max-height: 340px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.review-item {
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--green-dim);
+    background: var(--panel-2);
+    padding: 10px 12px;
+    animation: slideInRight .3s steps(4);
+}
+
+.review-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.review-speaker {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green);
+}
+
+.review-speaker.undercover {
+    color: var(--red);
+    text-shadow: 0 0 6px rgba(255, 59, 59, .5);
+}
+
+.review-round {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-faint);
+}
+
+.review-content {
+    font-size: 13px;
+    color: var(--text);
+}
+
+.empty-review {
+    color: var(--text-faint);
+    text-align: center;
+    padding: 20px;
+    border: 1px dashed var(--line);
+    font-size: 12px;
+}
+
+/* ---------- 操作区 ---------- */
+.result-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 4px;
+}
+
+.result-actions .btn { min-width: 140px; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 640px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .result-hero h1 { font-size: 24px; }
+}

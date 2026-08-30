@@ -1,0 +1,276 @@
+/* ============================================================
+   MPOSTOR 趣味问答 · 工业终端风
+   ============================================================ */
+
+.quiz-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 30px 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ---------- 页眉 ---------- */
+.quiz-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-bright);
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.quiz-header::after {
+    content: '+';
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    transform: translateX(-50%);
+    background: var(--bg);
+    color: var(--green-dim);
+    padding: 0 8px;
+    font-family: var(--mono);
+    line-height: 1;
+}
+
+.back-link {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    transition: all .12s;
+}
+.back-link:hover {
+    color: var(--green);
+    border-color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.quiz-header h1 {
+    font-size: 22px;
+    color: var(--green);
+    letter-spacing: .14em;
+    text-shadow: var(--glow-strong);
+    margin-right: auto;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ---------- 状态徽章 ---------- */
+.status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+}
+.status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--green-dark);
+}
+.status.playing { color: var(--green); border-color: var(--green-dim); }
+.status.playing::before {
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: ledBlink 1.2s steps(1) infinite;
+}
+.status.ended { color: var(--amber); border-color: var(--amber); }
+.status.ended::before {
+    background: var(--amber);
+    box-shadow: 0 0 6px rgba(255, 179, 0, .7);
+}
+
+/* ---------- 状态条 ---------- */
+.quiz-bar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+}
+
+.bar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: var(--text-faint);
+}
+
+.score-value {
+    font-family: var(--mono);
+    font-size: 22px;
+    color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.progress-segs {
+    display: flex;
+    gap: 4px;
+}
+
+.progress-seg {
+    width: 16px;
+    height: 8px;
+    background: var(--green-dark);
+    border: 1px solid var(--line);
+}
+.progress-seg.done { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.progress-seg.current { background: transparent; border-color: var(--green); animation: ledBlink 1s steps(1) infinite; }
+.progress-seg.failed { background: var(--red); border-color: var(--red); box-shadow: 0 0 6px rgba(255, 59, 59, .6); }
+
+/* ---------- 题目 ---------- */
+.question-text {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.8;
+    letter-spacing: .05em;
+    padding: 14px 16px;
+    border-left: 2px solid var(--green-dim);
+    background: var(--panel-2);
+    margin: 0 0 14px;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 4px;
+}
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-size: 14px;
+    font-family: var(--mono);
+    letter-spacing: .04em;
+    cursor: pointer;
+    text-align: left;
+    transition: all .12s steps(2);
+}
+.option-btn:hover:not(:disabled) {
+    border-color: var(--green);
+    color: var(--green);
+    text-shadow: var(--glow);
+    background: var(--green-dark);
+}
+.option-btn:disabled { cursor: default; }
+
+.option-key {
+    width: 26px;
+    height: 26px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line-bright);
+    font-size: 12px;
+    color: var(--green-dim);
+}
+
+.option-btn.correct {
+    border-color: var(--green);
+    background: rgba(0, 255, 65, .08);
+    color: var(--green);
+    text-shadow: var(--glow);
+}
+.option-btn.correct .option-key { border-color: var(--green); color: var(--green); box-shadow: 0 0 6px var(--green); }
+
+.option-btn.wrong {
+    border-color: var(--red);
+    background: rgba(255, 59, 59, .08);
+    color: var(--red);
+}
+.option-btn.wrong .option-key { border-color: var(--red); color: var(--red); }
+
+/* ---------- 反馈行 ---------- */
+.feedback-line {
+    min-height: 22px;
+    margin-top: 14px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    letter-spacing: .05em;
+    border-top: 1px dashed var(--line);
+}
+.feedback-line.ok  { color: var(--green); }
+.feedback-line.err { color: var(--red); }
+
+/* ---------- 结算弹窗 ---------- */
+.game-over {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(2, 6, 3, .88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn .3s steps(5);
+}
+
+.game-over-content {
+    width: min(440px, 92vw);
+    text-align: center;
+    padding: 34px 28px 30px;
+}
+
+.result-icon {
+    font-family: var(--mono);
+    font-size: 44px;
+    color: var(--green);
+    text-shadow: var(--glow-strong);
+    animation: ledPulse 1.6s infinite;
+}
+
+.game-over-content h2 {
+    font-size: 26px;
+    color: var(--green);
+    letter-spacing: .16em;
+    text-shadow: var(--glow-strong);
+    margin: 12px 0 10px;
+}
+
+.result-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    letter-spacing: .06em;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.result-desc strong { color: var(--amber); }
+
+.game-over-content .btn { min-width: 160px; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 640px) {
+    .quiz-bar { gap: 12px; }
+}

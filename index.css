@@ -1,0 +1,428 @@
+/* ============================================================
+   MPOSTOR 首页 · 工业终端风
+   ============================================================ */
+
+.home-container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 30px 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* ---------- 页眉 ---------- */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-bright);
+    position: relative;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 页眉中央十字准星 */
+.home-header::after {
+    content: '+';
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    transform: translateX(-50%);
+    background: var(--bg);
+    color: var(--green-dim);
+    padding: 0 8px;
+    font-family: var(--mono);
+    line-height: 1;
+}
+
+.logo {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.logo-mark {
+    color: var(--green);
+    font-size: 16px;
+    text-shadow: var(--glow-strong);
+    animation: ledPulse 2s infinite;
+}
+
+.logo-text {
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--green);
+}
+
+.logo-sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    color: var(--text-dim);
+    padding-left: 10px;
+    border-left: 1px solid var(--line);
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: .06em;
+}
+
+.status-sep { color: var(--text-faint); }
+
+.player-id {
+    padding: 3px 10px;
+    border: 1px dashed var(--line-bright);
+    color: var(--green);
+    text-shadow: var(--glow);
+}
+
+.account-chip {
+    padding: 3px 10px;
+    border: 1px solid var(--green-dim);
+    background: var(--green-dark);
+    color: var(--green);
+    text-shadow: var(--glow);
+}
+
+/* ---------- HERO ---------- */
+.hero-section {
+    text-align: center;
+    padding: 10px 0 4px;
+    position: relative;
+}
+
+.hero-title {
+    font-size: 46px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: .12em;
+    text-shadow: var(--glow-strong);
+    margin-bottom: 6px;
+}
+
+.hero-desc {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .22em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+/* ---------- 游戏卡片 ---------- */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.game-card {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 20px;
+    cursor: pointer;
+    transition: all .15s steps(3);
+    overflow: hidden;
+    /* 四角角框 */
+    background-image:
+        linear-gradient(var(--green) 0 0), linear-gradient(var(--green) 0 0),
+        linear-gradient(var(--green) 0 0), linear-gradient(var(--green) 0 0),
+        linear-gradient(var(--green) 0 0), linear-gradient(var(--green) 0 0),
+        linear-gradient(var(--green) 0 0), linear-gradient(var(--green) 0 0);
+    background-position:
+        top left, top right, bottom left, bottom right,
+        top left, top right, bottom left, bottom right;
+    background-size:
+        14px 2px, 14px 2px, 14px 2px, 14px 2px,
+        2px 14px, 2px 14px, 2px 14px, 2px 14px;
+    background-repeat: no-repeat;
+}
+
+.game-card:hover {
+    border-color: var(--green);
+    box-shadow: var(--glow);
+    transform: translateY(-3px);
+}
+
+/* 卡片扫描线动画 */
+.game-card-scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -100%;
+    height: 40px;
+    background: linear-gradient(180deg, transparent, rgba(0, 255, 65, .08), transparent);
+    pointer-events: none;
+}
+.game-card:hover .game-card-scan { animation: cardScan 1.6s linear infinite; }
+@keyframes cardScan {
+    from { top: -15%; }
+    to   { top: 110%; }
+}
+
+.game-card-icon {
+    font-family: var(--mono);
+    font-size: 26px;
+    color: var(--green);
+    text-shadow: var(--glow-strong);
+    border: 1px solid var(--line-bright);
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    line-height: 46px;
+    text-align: center;
+    margin-bottom: 12px;
+    background: var(--panel-2);
+}
+
+.game-card-title {
+    font-size: 19px;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: .06em;
+}
+
+.game-card-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+.game-card-meta {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.game-card .btn { width: 100%; }
+
+.game-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.online-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--amber);
+    text-decoration: none;
+    border: 1px solid var(--amber);
+    padding: 4px 10px;
+    display: inline-block;
+    transition: all .12s steps(2);
+}
+.online-link:hover {
+    box-shadow: 0 0 10px rgba(255, 179, 0, .5);
+    text-shadow: 0 0 6px rgba(255, 179, 0, .8);
+}
+
+/* ---------- 房间列表 ---------- */
+.room-section { margin-top: 2px; }
+
+.room-hint {
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: .04em;
+    border-left: 2px solid var(--green-dark);
+    padding-left: 10px;
+}
+
+.room-list { display: flex; flex-direction: column; gap: 8px; }
+
+.room-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--green-dim);
+    background: var(--panel-2);
+    transition: all .12s steps(2);
+    flex-wrap: wrap;
+}
+
+.room-card:hover {
+    border-color: var(--line-bright);
+    border-left-color: var(--green);
+}
+
+.room-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+}
+
+.room-name {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.preset-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--amber);
+    border: 1px solid var(--amber);
+    padding: 1px 6px;
+    letter-spacing: .1em;
+}
+
+.type-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    border: 1px solid var(--green-dim);
+    padding: 1px 6px;
+    letter-spacing: .1em;
+}
+
+.room-detail {
+    display: flex;
+    gap: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: .05em;
+}
+
+.room-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+.room-status.waiting { color: var(--green); border-color: var(--green-dim); }
+.room-status.playing { color: var(--amber); border-color: var(--amber); animation: ledBlink 1.2s steps(1) infinite; }
+.room-status.ended   { color: var(--text-faint); }
+
+.room-actions { display: flex; gap: 8px; }
+
+.btn-join {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    padding: 6px 16px;
+    background: var(--green-dark);
+    color: var(--green);
+    border: 1px solid var(--green-dim);
+    cursor: pointer;
+    text-shadow: var(--glow);
+}
+.btn-join:hover:not(:disabled) {
+    border-color: var(--green);
+    background: var(--green-dim);
+    color: #041008;
+}
+.btn-join:disabled {
+    background: #051008;
+    color: var(--text-faint);
+    border-color: var(--line);
+    cursor: not-allowed;
+    text-shadow: none;
+}
+
+/* ---------- 页脚 ---------- */
+.home-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+}
+
+.footer-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: .14em;
+    text-align: center;
+}
+
+.hidden-terminal .term-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 720px) {
+    .game-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 34px; }
+    .home-header { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- 成就栏 Achievement Wall ---------- */
+.ach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+}
+.ach-cell {
+    border: 1px solid var(--line);
+    background: var(--panel-2);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    transition: border-color .2s;
+}
+.ach-cell.unlocked {
+    border-color: var(--green-dim);
+    background: linear-gradient(180deg, rgba(0, 255, 65, .06), var(--panel-2));
+}
+.ach-cell.unlocked:hover { border-color: var(--green); }
+.ach-cell.locked { opacity: .55; filter: grayscale(1); }
+.ach-icon {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--green);
+    text-shadow: var(--glow);
+    line-height: 1;
+}
+.ach-cell.locked .ach-icon { color: var(--text-faint); text-shadow: none; }
+.ach-name {
+    font-size: 12px;
+    color: var(--text);
+    letter-spacing: .06em;
+}
+.ach-state {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .12em;
+    color: var(--green-dim);
+}
+.ach-cell.locked .ach-state { color: var(--text-faint); }

@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;  /* Safari 3+ */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* 标准语法 */
+}
+
+body{
+    background: #2f343e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+}
+
+.game-container{
+    max-width: 720px;
+    width: 100%;
+    background:rgba(255,255,255,0.8);
+    border-radius: 64px 48px 64px 48px;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.6);
+    overflow: hidden;
+}
+
+.game-header{
+    background: green;
+    padding: 28px 24px 20px;
+    text-align: center;
+    color :wheat;
+    text-shadow: 2px 2px 0 #169A1F;
+    border-bottom: 4px solid #9A9A16;
+}
+
+.game-header h1{
+    font-size: 2.2rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.game-settings{
+    padding: 28px 28px 36px;
+}
+
+.setting-group{
+    margin-bottom: 32px;
+    background: #FFFFFF;
+    border-radius: 40px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: all 0.2s;
+}
+
+.setting-label{
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #4F6648;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    border-left: 6px solid #169A1F;
+    padding-left: 16px;
+}
+
+.setting-label i {
+    font-size: 1.4rem;
+}
+
+.playersGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.players-input{
+    width: 100%;
+    padding: 12px 18px;
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    color: #000000;
+    font-family: inherit;
+    border-radius: 60px;
+}
+
+.start-btn-wrapper{
+    text-align: center;
+    margin-top: 32px;
+}
+
+.btn-start{
+    background: linear-gradient(110deg,#9A9A16,#169A1F);
+    border: none;
+    padding: 16px 40px;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: white;
+    border-radius: 80px;
+    cursor: pointer;
+    width: 80%;
+    max-width: 320px;
+    box-shadow: 0 8px 0 #4F6648;
+    transition: 0.1s linear;
+    letter-spacing: 4px;
+}
